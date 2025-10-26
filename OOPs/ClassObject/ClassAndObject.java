@@ -1,6 +1,6 @@
-package OOPs;
+package OOPs.ClassObject;
 
-public class Car {
+public class ClassAndObject {
 
     // fields, attributes, properties
     String name;
@@ -14,7 +14,7 @@ public class Car {
 
     public static void main(String[] args) {
 
-        Car c = new Car();
+        ClassAndObject c = new ClassAndObject();
 
         //first set the speed
 
