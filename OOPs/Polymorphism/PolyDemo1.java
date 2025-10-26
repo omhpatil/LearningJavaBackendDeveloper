@@ -35,7 +35,7 @@ public class PolyDemo1 {
 
         // For method overriding
         Parent pp = new Child();
-        System.out.println(pp.multi(10,10)); // because here multi() method runs based on the runtime
+        System.out.println(pp.multi(10,10)); // because here multi() method runs based on the runtime (using dynamic method dispatcher)
         // Note: always executes the methods of object created class not reference class.
     }
 }
