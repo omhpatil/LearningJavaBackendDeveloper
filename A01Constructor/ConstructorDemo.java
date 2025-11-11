@@ -1,4 +1,4 @@
-package Constructor;
+package A01Constructor;
 
 public class ConstructorDemo {
 

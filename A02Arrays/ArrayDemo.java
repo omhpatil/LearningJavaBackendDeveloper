@@ -1,4 +1,4 @@
-package Arrays;
+package A02Arrays;
 
 public class ArrayDemo {
     public static void main(String[] args) {

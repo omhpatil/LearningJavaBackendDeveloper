@@ -1,4 +1,4 @@
-package String;
+package A05String;
 
 public class CapitalizeFirstLetterString {
     public static void main(String[] args) {

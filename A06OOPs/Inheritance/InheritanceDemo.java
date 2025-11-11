@@ -1,4 +1,4 @@
-package OOPs.Inheritance;
+package A06OOPs.Inheritance;
 
 class Animal {
     void sound() {

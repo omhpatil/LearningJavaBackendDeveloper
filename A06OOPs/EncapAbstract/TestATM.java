@@ -1,4 +1,4 @@
-package OOPs.EncapAbstract;
+package A06OOPs.EncapAbstract;
 
 public class TestATM {
     public static void main(String[] args) {

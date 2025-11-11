@@ -1,4 +1,4 @@
-package String;
+package A05String;
 
 public class RemoveDuplicateChar {
     public static void main(String[] args) {

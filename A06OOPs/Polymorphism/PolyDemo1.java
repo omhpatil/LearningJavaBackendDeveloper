@@ -1,4 +1,4 @@
-package OOPs.Polymorphism;
+package A06OOPs.Polymorphism;
 
 class Parent {
     int multi(int a, int b) {

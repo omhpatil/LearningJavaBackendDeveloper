@@ -1,4 +1,4 @@
-package Methods;
+package A04Methods;
 
 // Method are the set of instructions which are used to perform specific task
 // Basically there is no any type of method but for practice there are four types of methods

@@ -1,4 +1,4 @@
-package OOPs.ClassObject;
+package A06OOPs.ClassObject;
 
 public class ClassAndObject {
 
