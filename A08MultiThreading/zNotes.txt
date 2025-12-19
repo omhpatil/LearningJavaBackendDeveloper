@@ -70,3 +70,17 @@ Intermediate thread method:
 3. sleep() -> pause the current thread for specified number of milliseconds
 
 Advance thread method:
+
+
+
+Difference between wait() and join(): imp question for interview
+
+| Feature           | `join()`                              | `wait()`                                |
+| ----------------- | ------------------------------------- | --------------------------------------- |
+| Purpose           | Wait for **another thread to finish** | Wait for a **condition / notification** |
+| Belongs to        | `Thread` class                        | `Object` class                          |
+| Used for          | Thread completion                     | Inter-thread communication              |
+| Lock required     | ❌ No                                  | ✅ Yes (`synchronized`)                  |
+| Lock released     | ❌ No shared object lock               | ✅ Releases object lock                  |
+| Wake-up condition | Thread terminates                     | `notify()` / `notifyAll()`              |
+| Typical use case  | Main waits for worker threads         | Producer–Consumer                       |

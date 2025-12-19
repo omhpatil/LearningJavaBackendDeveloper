@@ -1,0 +1,45 @@
+1. What are Daemon Threads?
+Definition
+Daemon threads are low-priority background threads that provide services to user threads (non-daemon threads).
+They run in the background and are automatically terminated when all user threads finish execution.
+Key Characteristics: User Thread (Normal Thread)
+
+High priority threads
+JVM waits for these threads to complete before shutting down
+Main application logic runs here
+Example: Main thread, application threads
+
+Daemon Thread:
+Low priority background threads
+JVM does NOT wait for these to complete
+JVM exits as soon as all user threads finish, even if daemon threads are still running
+Automatically terminated when last user thread dies
+Example: Garbage collector, finalizer thread
+
+Visual Analogy: Think of a shop with workers,
+User threads = Main workers doing important customer-facing work
+Daemon threads = Janitors cleaning in the background
+When the shop closes (all main workers leave), the janitors are sent home immediately, even if they haven't finished cleaning!
+
+Important Points to Remember:
+Always set daemon status BEFORE calling start()
+Daemon threads should NOT do critical work (like writing to database) because they can be killed mid-operation
+Main thread is always a user thread
+Child threads inherit daemon status from parent
+Use daemon threads for housekeeping tasks only
+Daemon threads are not reliable for cleanup operations (use shutdown hooks instead for critical cleanup)
+
+When to Use Daemon Threads? Use daemon threads for:
+Background monitoring
+Periodic cleanup tasks
+Heartbeat/ping services
+Log processing
+Cache refresh
+Statistics collection
+
+Don't use daemon threads for:
+Database transactions
+File I/O operations
+Network communication that must complete
+Any critical business logic
+Resource cleanup (use try-with-resources or shutdown hooks)
