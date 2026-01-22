@@ -1,0 +1,63 @@
+Main aim of java 1.8 version:
+- Simplify the java programming
+- Enable functional programming
+- Write more readable and concise code
+
+Java 8 Features
+1) Interface changes:
+    - upto java 1.7 we can write only abstract method but from the java 1.8 we can write concrete method inside it.
+    - upto java 1.7 we can only write abstract method but from 1.8 we can write default and static methods
+
+2) Functional Interfaces (@FunctionalInterface): There are some functional interfaces got released in java 1.8 version
+    - Predicate
+    - Consumer
+    - Supplier
+    - Function
+
+3) Lambda Expression
+
+4) Methods References and Constructor References:
+    - Method reference is a shorthand syntax of lambda expression used to call an existing method directly.
+
+5) Stream APIs: imp for interview
+
+6) Optional Class: basically used to avoid the NullPointerException
+
+7) Special Iterator
+
+8) String Joiner
+
+9) Collection Framework Changes (for each method)
+
+10) Data and Time APIs
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+     Collection
+
+List    Set     Queue
+
+AL      HS      PQ
+LL      LHS     DQ
+S       TS
+V
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+1) Interface Changes:
+    - Interface is collection of abstract methods.
+    - The methods which does not contains any body is called abstract methods.
+    - Interface in Java is a blueprint that defines what a class must do (methods), not how it does it.
+    - Suppose we implement any interface we need to write abstract methods implementation inside the interface in the classes in which we are implementing the interface
+    - Implementing interface is nothing but overriding the abstract methods.
+    - Suppose we are adding one more abstract method in the interface so classes who implemented that interface will get compilation
+      error(need to write implementation of abstract methods) so that is why default and static methods comes in front.
+    - diff between the default and static method is that we can override the default method but we cannot override static methods
+    - also we can call default methods using the object but for static we call it using the class name or that interface name.
+    - also if we have to concrete method we need to use the default keyword in it.
+
+
+
+
+
+
