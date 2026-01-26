@@ -55,9 +55,39 @@ V
     - diff between the default and static method is that we can override the default method but we cannot override static methods
     - also we can call default methods using the object but for static we call it using the class name or that interface name.
     - also if we have to concrete method we need to use the default keyword in it.
+    - Default and static methods introduced to provide backword compatability.
+    - Interface methods are public by default, so the implementing class must implement them as public.
+Ex. forEach() method added in java.util.Iterable interface as default method in java 1.8v.
 
+------------------------------------------------------------------------------------------------------------------------------------
 
+2) Lambda Expression:
+    - A lambda expression is a short way to write a method without a name.
+    - Lambda Expressions introduced in java to enable functional programming(FP means one function can passed as parameter in methods).
+    - Lambda is an anonymous function which does not have any name, access modifier and return type also.
 
+    Q. Why lambda has NO name, modifier, or return type?
+    - Method name comes from functional interface
+    - Access modifier is inherited
+    - Return type is inferred by compiler
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+3) Functional Interface:
+    - If there is only one abstract method inside the interface then it will be called as functional interface.
+    - Also when we write @FI then our compiler will check interface contains only one abstract method or not.
+    - A lambda expression needs a functional interface to know what method it is implementing.
+    - Below are some predefined functional interfaces.
+        Runnable -----> run() method
+        Callable -----> call() method
+        Comparable ---> compareTo()
+    - To represent the interface as Functional Interface we will use @FunctionalInterface Annotation.
+
+    Q: Do we need to implement Runnable or Callable? This is a very common confusion.
+    - Runnable and Callable are: predefined functional interfaces
+    - provided by Java (java.lang, java.util.concurrent)
+    - But they are NOT mandatory.
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 

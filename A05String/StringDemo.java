@@ -28,7 +28,7 @@ public class StringDemo {
 }
 
 
-//        | String            | Location | How Created           | Notes                                       |
+//        | String            | Location | How Created           | ZNotes                                       |
 //        | ----------------- | -------- | --------------------- | ------------------------------------------- |
 //        | `"Java"`          | SCP      | String literal        | Reused if same literal exists               |
 //        | `"Fullstack"`     | SCP      | String literal        | Stored once in SCP                          |
