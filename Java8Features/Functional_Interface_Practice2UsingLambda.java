@@ -19,13 +19,16 @@ interface Vehicle {
     }
 }
 
-public class Functional_Interface_Practice2 {
+public class Functional_Interface_Practice2UsingLambda {
 
     public static void main(String[] args) throws Exception {
 
-        /* ==============================
-           1. Functional Interface + Lambda
-           ============================== */
+        /* IMP: When a class implements an interface, it must implement all abstract methods and by creating the object
+        we can access abstract, default, and static methods. But when using lambda, we create a reference of the functional interface,
+        the lambda provides implementation of the abstract method, and we can then access abstract and
+        default methods via the reference and static methods via the interface name. */
+
+        /* 1. Functional Interface + Lambda */
 
         Vehicle v = () -> System.out.println("Lambda implements car()");
         v.car();
@@ -34,9 +37,7 @@ public class Functional_Interface_Practice2 {
 
         System.out.println("-----------------------");
 
-        /* ==============================
-           2. Runnable → run()
-           ============================== */
+        /* 2. Runnable → run() */
 
         Runnable r = () -> System.out.println("Runnable Lambda: run() executed");
         Thread t = new Thread(r);
@@ -44,9 +45,7 @@ public class Functional_Interface_Practice2 {
 
         System.out.println("-----------------------");
 
-        /* ==============================
-           3. Callable → call()
-           ============================== */
+        /* 3. Callable → call() */
 
         Callable<Integer> c = () -> {
             return 100;
@@ -55,9 +54,7 @@ public class Functional_Interface_Practice2 {
 
         System.out.println("-----------------------");
 
-        /* ==============================
-           4. Comparable → compareTo()
-           ============================== */
+        /* 4. Comparable → compareTo() */
 
         Comparable<Integer> comp = (num) -> num - 50;
 
