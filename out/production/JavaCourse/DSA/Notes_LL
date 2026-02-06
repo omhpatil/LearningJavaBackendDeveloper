@@ -1,0 +1,81 @@
+Q: What does “random access” mean?
+    Random access means you can directly go to any position.
+arr = [10, 20, 30, 40]
+arr[2] → 30   ✅ (direct access) - This is fast because the index is known.
+
+How a Linked List works: A linked list is made of nodes.
+Each node contains:
+Data and Address of the next node
+
+10 → 20 → 30 → 40 → null
+You only know the first node (head).
+
+Suppose you want the 3rd element (30).
+In an array: You directly jump to index 2
+In a linked list: You must start from the head
+Move node by node
+Step-by-step access:
+Start at 10
+Move to 20
+Move to 30 ✅
+You cannot jump directly to 30.
+👉 You must traverse sequentially
+
+Node current = head;   // start from first node
+int position = 3;
+for (int i = 1; i < position; i++) {
+    current = current.next;
+}
+System.out.println(current.data); // prints 30
+
+Q: Why insertion is efficient? : Because only links change, not memory shifting
+
+Q: Why linked list is slower than array? Because of cache miss + traversal
+
+Q: What is Linked List: A Linked List is a linear data structure where elements are not stored in continuous memory.
+Each element is called a node. and Every node has data and reference(link) to the next node
+
+Q: What is Node in LL: A Node is the basic building block of a linked list.
+A linked list is made by connecting many nodes together.
+
+Q: What is Head in LL: Head is the reference to the first node of the linked list.
+                    It is used to start accessing the list.
+
+Q: What is Tail in LL: Tail is the reference to the last node of the linked list.
+                    The next of tail is always null (in singly linked list).
+
+
+Why Linked List? (Why not just arrays?)
+| Problem          | Explanation                   |
+| ---------------- | ----------------------------- |
+| Fixed size       | Size must be known in advance |
+| Insertion costly | Shifting elements needed      |
+| Deletion costly  | Shifting again                |
+| Memory waste     | Extra unused slots            |
+
+
+Advantages of Linked List ✅
+| Advantage      | Why                  |
+| -------------- | -------------------- |
+| Dynamic size   | Grows/shrinks easily |
+| Easy insertion | No shifting          |
+| Easy deletion  | Just change links    |
+
+Disadvantages ❌
+| Disadvantage     | Why                 |
+| ---------------- | ------------------- |
+| No random access | Cannot do `list[5]` |
+| Extra memory     | For storing links   |
+| Slower access    | Traversal needed    |
+
+Types of LinkedList:
+
+1. Singly Linked List
+Data | Next → Data | Next → Data | Next → null
+
+2. Doubly Linked List
+null ← Prev | Data | Next → Prev | Data | Next → null
+
+3. Circular Linked List
+Last node points back to first node
+

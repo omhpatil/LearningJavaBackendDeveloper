@@ -1,0 +1,889 @@
+=====================================================
+C) BEHAVIORAL DESIGN PATTERNS
+=====================================================
+
+1) What are Behavioral Design Patterns?
+--------------------------------------
+Behavioral Design Patterns deal with HOW objects
+INTERACT and COMMUNICATE with each other.
+
+They focus on:
+- Object collaboration
+- Responsibility distribution
+- Communication between objects
+
+In simple words:
+→ They define how objects behave and interact
+
+
+-----------------------------------------------------
+
+2) Problem Without Behavioral Design Patterns
+----------------------------------------------
+Without behavioral patterns:
+
+❌ Tight coupling between objects
+❌ Hardcoded communication logic
+❌ Difficult to add new behaviors
+❌ Poor flexibility and scalability
+
+Example:
+Objects directly calling each other with complex
+if-else logic
+
+
+-----------------------------------------------------
+
+3) Solution by Using Behavioral Design Patterns
+-----------------------------------------------
+
+| Problem                           | Solution Provided             |
+|----------------------------------|-------------------------------|
+| Tight coupling                   | Decouple interacting objects  |
+| Hardcoded behavior               | Encapsulate behavior          |
+| Difficult to extend logic        | Use polymorphism              |
+| Poor communication management    | Define clear interaction      |
+
+
+-----------------------------------------------------
+
+4) Key Focus of Behavioral Patterns
+-----------------------------------
+- Object INTERACTION
+- Communication flow
+- Responsibility delegation
+- Runtime behavior change
+
+
+-----------------------------------------------------
+
+5) Types of Behavioral Design Patterns
+--------------------------------------
+
+| Pattern                | Purpose                                          |
+|------------------------|--------------------------------------------------|
+| **Command**            | Encapsulate request as an object                 |
+| **Strategy**           | Encapsulate algorithms                           |
+| **Observer**           | Notify multiple objects of changes               |
+| **State**              | Change behavior based on state                   |
+| **Template Method**    | Define algorithm skeleton                        |
+| **Chain of Responsibility** | Pass request along chain                  |
+| **Mediator**           | Centralize communication                         |
+| **Iterator**           | Traverse collection uniformly                   |
+| **Memento**            | Capture and restore object state                 |
+| **Visitor**            | Add operations without modifying objects         |
+| **Interpreter**        | Interpret language grammar                       |
+
+
+-----------------------------------------------------
+
+6) One-Line Explanation of Each Pattern
+---------------------------------------
+
+Command:
+→ Wraps request into an object
+
+Strategy:
+→ Select algorithm at runtime
+
+Observer:
+→ One-to-many notification
+
+State:
+→ Behavior changes with state
+
+Template Method:
+→ Skeleton of algorithm
+
+Chain of Responsibility:
+→ Pass request through handlers
+
+Mediator:
+→ Centralizes object communication
+
+Iterator:
+→ Uniform traversal
+
+Memento:
+→ Save & restore state
+
+Visitor:
+→ Add new operations
+
+Interpreter:
+→ Interpret grammar rules
+
+
+-----------------------------------------------------
+
+7) Where are Behavioral Patterns Used (Real World)
+--------------------------------------------------
+- Event handling systems
+- Workflow engines
+- GUI frameworks
+- Notification systems
+- Business rule engines
+- Spring Framework (events, AOP)
+
+
+-----------------------------------------------------
+
+8) Behavioral vs Creational vs Structural
+-----------------------------------------
+
+Creational Patterns:
+- Object creation
+
+Structural Patterns:
+- Object composition
+
+Behavioral Patterns:
+- Object interaction & communication
+
+
+-----------------------------------------------------
+
+9) One-Line Interview Answer
+----------------------------
+Behavioral Design Patterns focus on how objects
+interact and distribute responsibilities among
+themselves.
+
+
+-----------------------------------------------------
+
+10) Ultra-Short Revision
+-----------------------
+- Object collaboration
+- Communication flow
+- Runtime behavior change
+- Responsibility delegation
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+=====================================================
+COMMAND DESIGN PATTERN
+=====================================================
+
+1) What is Command Pattern?
+--------------------------
+Command pattern is a behavioral design pattern that
+encapsulates a REQUEST as an OBJECT.
+
+In simple words:
+→ Turn a request into an object so it can be
+   passed, queued, logged, or undone.
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Command Pattern?
+---------------------------------
+Problems without Command:
+❌ Sender is tightly coupled to receiver
+❌ Hard to add new commands
+❌ Cannot support undo/redo easily
+❌ Requests cannot be queued or logged
+
+Example:
+Remote control directly calling TV.on(), TV.off()
+
+
+-----------------------------------------------------
+
+3) How do we know it is Command Pattern?
+---------------------------------------
+- There is a COMMAND interface
+- Concrete command classes exist
+- Command holds reference to RECEIVER
+- INVOKER triggers the command
+- RECEIVER performs actual action
+
+Key Identifier:
+→ Request wrapped inside an object
+
+
+-----------------------------------------------------
+
+4) Structure of Command Pattern
+--------------------------------
+Command
+  └── Declares execute()
+
+ConcreteCommand
+  └── Implements execute()
+  └── Calls receiver
+
+Receiver
+  └── Performs actual operation
+
+Invoker
+  └── Triggers command
+
+Client
+  └── Creates and assigns command
+
+
+-----------------------------------------------------
+
+5) What Problem Does It Solve?
+------------------------------
+Problems:
+- Tight coupling between sender & receiver
+- Hardcoded method calls
+- Difficult to add new operations
+
+Solutions:
+- Decouples sender from receiver
+- Easy to add new commands
+- Supports undo/redo and queuing
+
+
+-----------------------------------------------------
+
+6) Real-Life Example
+--------------------
+- Remote control (ON / OFF buttons)
+- Restaurant order system
+- Toolbar buttons in editors
+- Menu actions (Undo, Redo)
+
+
+-----------------------------------------------------
+
+7) Advantages
+-------------
+✔ Loose coupling
+✔ Open–Closed Principle
+✔ Easy to add new commands
+✔ Supports undo/redo
+✔ Supports command history
+
+
+-----------------------------------------------------
+
+8) Disadvantages
+----------------
+❌ Many small command classes
+❌ Slightly complex structure
+
+
+-----------------------------------------------------
+
+9) Command vs Strategy (IMPORTANT)
+----------------------------------
+Command:
+- Encapsulates a REQUEST
+- Focus on action execution
+
+Strategy:
+- Encapsulates an ALGORITHM
+- Focus on behavior selection
+
+
+-----------------------------------------------------
+
+10) Real-World Usage
+--------------------
+- GUI button actions
+- Thread pools (Runnable)
+- Transaction management
+- Spring @Transactional internally
+
+
+-----------------------------------------------------
+
+11) One-Line Interview Answer
+----------------------------
+Command pattern encapsulates a request as an object,
+allowing parameterization, queuing, and undo/redo.
+
+
+-----------------------------------------------------
+
+12) Ultra-Short Revision
+-----------------------
+- Request as object
+- Decouple sender & receiver
+- Undo / Redo
+- Command history
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+=====================================================
+ITERATOR DESIGN PATTERN
+=====================================================
+
+1) What is Iterator Pattern?
+----------------------------
+Iterator pattern is a behavioral design pattern that
+provides a WAY TO ACCESS elements of a collection
+SEQUENTIALLY without exposing its internal structure.
+
+In simple words:
+→ Traverse a collection without knowing how it is stored
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Iterator?
+---------------------------
+Problems without Iterator:
+❌ Client must know internal data structure
+❌ Different traversal logic for each collection
+❌ Tight coupling with collection implementation
+
+Example:
+Looping differently for Array, List, Set, etc.
+
+
+-----------------------------------------------------
+
+3) How do we know it is Iterator Pattern?
+----------------------------------------
+- Collection exposes an iterator()
+- Iterator has methods like hasNext() and next()
+- Client uses iterator, not collection internals
+- Traversal logic is separated
+
+Key Identifier:
+→ Traversal logic separated from collection
+
+
+-----------------------------------------------------
+
+4) Structure of Iterator Pattern
+--------------------------------
+Iterator
+  └── Declares traversal methods
+
+ConcreteIterator
+  └── Implements traversal logic
+
+Aggregate (Collection)
+  └── Declares iterator() method
+
+ConcreteAggregate
+  └── Returns concrete iterator
+
+Client
+  └── Uses iterator to traverse
+
+
+-----------------------------------------------------
+
+5) What Problem Does It Solve?
+------------------------------
+Problems:
+- Tight coupling to data structure
+- Complex traversal logic
+- Difficult to support multiple traversals
+
+Solutions:
+- Uniform traversal
+- Encapsulation of internal structure
+- Clean client code
+
+
+-----------------------------------------------------
+
+6) Advantages
+-------------
+✔ Uniform way to traverse collections
+✔ Encapsulates internal structure
+✔ Supports multiple traversal strategies
+✔ Simplifies client code
+
+
+-----------------------------------------------------
+
+7) Disadvantages
+----------------
+❌ Extra objects (iterator instances)
+❌ Overkill for simple collections
+
+
+-----------------------------------------------------
+
+8) Real-World Example
+---------------------
+- Java Iterator (List, Set, Map)
+- Cursor in database
+- Playlist navigation
+- File system traversal
+
+
+-----------------------------------------------------
+
+9) Iterator vs For-Each Loop
+----------------------------
+For-Each Loop:
+- Uses iterator internally
+- Less control
+
+Iterator:
+- Explicit control
+- Can remove elements safely
+
+
+-----------------------------------------------------
+
+10) Iterator vs Composite
+-------------------------
+Iterator:
+- Traverses collection
+
+Composite:
+- Represents tree structure
+
+
+-----------------------------------------------------
+
+11) Real-World Usage
+--------------------
+- Java Collections Framework
+- Streams (internally)
+- Database cursors
+- Messaging systems
+
+
+-----------------------------------------------------
+
+12) One-Line Interview Answer
+----------------------------
+Iterator pattern provides a uniform way to traverse
+elements of a collection without exposing its
+internal representation.
+
+
+-----------------------------------------------------
+
+13) Ultra-Short Revision
+-----------------------
+- Traversal pattern
+- Decouples traversal logic
+- hasNext() / next()
+- Hides internal structure
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+=====================================================
+OBSERVER DESIGN PATTERN
+=====================================================
+
+1) What is Observer Pattern?
+---------------------------
+Observer pattern is a behavioral design pattern that
+defines a ONE-TO-MANY dependency between objects.
+
+When ONE object (subject) changes state,
+ALL its dependent objects (observers) are notified
+automatically.
+
+In simple words:
+→ One change, many notifications
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Observer?
+--------------------------
+Problems without Observer:
+❌ Tight coupling between objects
+❌ Hardcoded notification logic
+❌ Difficult to add/remove listeners
+
+Example:
+Manually notifying multiple services on data change
+
+
+-----------------------------------------------------
+
+3) How do we know it is Observer Pattern?
+----------------------------------------
+- There is a SUBJECT
+- Subject maintains a list of observers
+- Observers implement a common interface
+- Subject notifies observers on state change
+
+Key Identifier:
+→ Automatic notification to multiple objects
+
+
+-----------------------------------------------------
+
+4) Structure of Observer Pattern
+--------------------------------
+Subject
+  └── Registers / removes observers
+  └── Notifies observers
+
+Observer
+  └── Defines update() method
+
+ConcreteSubject
+  └── Holds state
+
+ConcreteObserver
+  └── Reacts to updates
+
+Client
+  └── Sets up observers
+
+
+-----------------------------------------------------
+
+5) What Problem Does It Solve?
+------------------------------
+Problems:
+- Hardcoded dependencies
+- Manual update calls
+- Poor scalability
+
+Solutions:
+- Loose coupling
+- Dynamic subscription
+- Automatic updates
+
+
+-----------------------------------------------------
+
+6) Advantages
+-------------
+✔ Loose coupling
+✔ Dynamic subscription
+✔ Supports broadcast communication
+
+
+-----------------------------------------------------
+
+7) Disadvantages
+----------------
+❌ Unexpected updates
+❌ Performance issues with many observers
+❌ Hard to debug
+
+
+-----------------------------------------------------
+
+8) Observer vs Polling
+----------------------
+Observer:
+- Push-based
+- Efficient
+
+Polling:
+- Pull-based
+- Inefficient
+
+
+-----------------------------------------------------
+
+9) Real-World Usage
+-------------------
+- Event listeners
+- Notification systems
+- Stock price updates
+- Spring ApplicationEvent
+- UI frameworks
+
+
+-----------------------------------------------------
+
+10) One-Line Interview Answer
+----------------------------
+Observer pattern defines a one-to-many dependency
+where observers are notified automatically when
+the subject changes state.
+
+
+-----------------------------------------------------
+
+11) Ultra-Short Revision
+-----------------------
+- One-to-many
+- Automatic notification
+- Loose coupling
+- Event-driven
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+=====================================================
+STRATEGY DESIGN PATTERN
+=====================================================
+
+1) What is Strategy Pattern?
+---------------------------
+Strategy pattern is a behavioral design pattern that
+defines a FAMILY OF ALGORITHMS, encapsulates each
+one, and makes them interchangeable.
+
+In simple words:
+→ Choose an algorithm at runtime
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Strategy?
+--------------------------
+Problems without Strategy:
+❌ Large if-else or switch statements
+❌ Hardcoded behavior
+❌ Difficult to add new algorithms
+❌ Violates Open–Closed Principle
+
+Example:
+Payment logic:
+if (type == CARD) ...
+else if (type == UPI) ...
+else if (type == CASH) ...
+
+
+-----------------------------------------------------
+
+3) How do we know it is Strategy Pattern?
+----------------------------------------
+- A STRATEGY interface exists
+- Multiple concrete strategies implement it
+- Context uses a strategy reference
+- Strategy can be changed at runtime
+
+Key Identifier:
+→ Same task, different algorithms
+
+
+-----------------------------------------------------
+
+4) Structure of Strategy Pattern
+--------------------------------
+Strategy
+  └── Common interface for algorithms
+
+ConcreteStrategy
+  └── Implements specific algorithm
+
+Context
+  └── Uses strategy reference
+
+Client
+  └── Chooses which strategy to use
+
+
+-----------------------------------------------------
+
+5) What Problem Does It Solve?
+------------------------------
+Problems:
+- Hardcoded algorithm selection
+- Poor flexibility
+- Difficult maintenance
+
+Solutions:
+- Loose coupling
+- Runtime algorithm selection
+- Easy extension
+
+
+-----------------------------------------------------
+
+6) Advantages
+-------------
+✔ Removes if-else conditions
+✔ Follows Open–Closed Principle
+✔ Easy to add new strategies
+✔ Clean and readable code
+
+
+-----------------------------------------------------
+
+7) Disadvantages
+----------------
+❌ Increased number of classes
+❌ Client must know about strategies
+
+
+-----------------------------------------------------
+
+8) Strategy vs State (IMPORTANT)
+--------------------------------
+Strategy:
+- Chooses algorithm
+- Client decides which strategy to use
+
+State:
+- Changes behavior based on internal state
+- Object decides behavior automatically
+
+
+-----------------------------------------------------
+
+9) Real-World Usage
+-------------------
+- Payment methods
+- Sorting algorithms
+- Compression strategies
+- Authentication mechanisms
+- Spring Security strategies
+
+
+-----------------------------------------------------
+
+10) One-Line Interview Answer
+----------------------------
+Strategy pattern defines a family of algorithms,
+encapsulates them, and allows switching them
+at runtime.
+
+
+-----------------------------------------------------
+
+11) Ultra-Short Revision
+-----------------------
+- Algorithm selection
+- Runtime behavior change
+- Replace if-else
+- Open–Closed Principle
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+=====================================================
+TEMPLATE METHOD DESIGN PATTERN
+=====================================================
+
+1) What is Template Method Pattern?
+----------------------------------
+Template Method pattern is a behavioral design pattern
+that defines the SKELETON of an algorithm in a base
+class and lets subclasses override specific steps
+without changing the algorithm structure.
+
+In simple words:
+→ Define steps once, allow subclasses to customize
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Template Method?
+---------------------------------
+Problems without Template Method:
+❌ Code duplication
+❌ Inconsistent algorithm steps
+❌ Hardcoded logic
+
+Example:
+Different payment flows sharing same steps
+
+
+-----------------------------------------------------
+
+3) How do we know it is Template Method Pattern?
+-----------------------------------------------
+- Base class defines a template method
+- Template method calls multiple steps
+- Some steps are abstract or overridable
+- Algorithm structure is fixed
+
+Key Identifier:
+→ Algorithm skeleton in base class
+
+
+-----------------------------------------------------
+
+4) Structure of Template Method Pattern
+---------------------------------------
+AbstractClass
+  └── Template method (final)
+  └── Abstract/Hook methods
+
+ConcreteClass
+  └── Implements specific steps
+
+Client
+  └── Uses concrete implementation
+
+
+-----------------------------------------------------
+
+5) What Problem Does It Solve?
+------------------------------
+Problems:
+- Duplicate algorithms
+- Hard to enforce sequence
+
+Solutions:
+- Reuse common logic
+- Enforce algorithm order
+- Controlled extensibility
+
+
+-----------------------------------------------------
+
+6) Advantages
+-------------
+✔ Code reuse
+✔ Enforces algorithm structure
+✔ Open–Closed Principle
+
+
+-----------------------------------------------------
+
+7) Disadvantages
+----------------
+❌ Limited flexibility
+❌ Inheritance-based (tight coupling)
+
+
+-----------------------------------------------------
+
+8) Template Method vs Strategy
+------------------------------
+Template Method:
+- Uses inheritance
+- Fixed algorithm structure
+
+Strategy:
+- Uses composition
+- Algorithm fully interchangeable
+
+
+-----------------------------------------------------
+
+9) Real-World Usage
+-------------------
+- Framework workflows
+- Spring JdbcTemplate
+- Data processing pipelines
+- Game engines
+
+
+-----------------------------------------------------
+
+10) One-Line Interview Answer
+-----------------------------
+Template Method defines the skeleton of an algorithm
+and allows subclasses to customize specific steps.
+
+
+-----------------------------------------------------
+
+11) Ultra-Short Revision
+-----------------------
+- Algorithm skeleton
+- Fixed steps order
+- Subclass customization
+- Code reuse
+
+=====================================================
+
+------------------------------------------------------------------------------------------------------------------------------------
+
