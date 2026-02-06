@@ -1,0 +1,954 @@
+A) Creational Design Patterns:
+    - Creational Design Patterns deal with object creation mechanisms.
+    - They control how objects are created, instead of creating objects directly using new.
+    - Without Creation Pattern: UserService service = new UserService();
+
+Problems:
+    ❌ Tight coupling
+    ❌ Hard to change object creation logic
+    ❌ Difficult to test (mocking)
+    ❌ Object creation logic scattered everywhere
+
+Solution by Using Creational Design Oatterns:
+    | Problem                       | Solution               |
+    | ----------------------------- | ---------------------- |
+    | Tight coupling                | Hide object creation   |
+    | Too many `new` keywords       | Centralize creation    |
+    | Complex object creation       | Step-by-step creation  |
+    | Need only one object          | Restrict instantiation |
+    | Need flexible object creation | Use polymorphism       |
+
+Types of singleton design pattern:
+    | Pattern              | Purpose                                       |
+    | -------------------- | --------------------------------------------- |
+    | **Singleton**        | Only ONE object                               |
+    | **Factory Method**   | Create objects without specifying exact class |
+    | **Abstract Factory** | Factory of factories                          |
+    | **Builder**          | Construct complex objects step-by-step        |
+    | **Prototype**        | Clone existing objects                        |
+
+Where are Creational Patterns Used (Real World)
+    Spring Framework (@Bean, @Configuration)
+    Database connections
+    Logging frameworks
+    Thread pools
+    Configuration objects
+    Caching
+
+************************************************************************************************************************************
+
+=====================================================
+SINGLETON DESIGN PATTERN
+=====================================================
+
+1) What is Singleton?
+--------------------
+Singleton ensures that a class has ONLY ONE instance
+and provides a GLOBAL access point to it.
+
+Used when:
+- Only one object must exist
+- Shared resources are needed
+
+Examples:
+- Logger
+- Configuration
+- Cache
+- Database connection manager
+
+Real-life example:
+Principal of a college → only one
+
+
+-----------------------------------------------------
+
+2) How do we know Singleton creates only ONE object?
+---------------------------------------------------
+- Constructor is PRIVATE → no external "new"
+- Single STATIC instance is stored
+- Public STATIC method returns the SAME instance
+
+Key Identifier:
+→ Every call returns the SAME object reference
+
+
+-----------------------------------------------------
+
+3) Rules of Singleton
+--------------------
+To make a class Singleton:
+
+1. Private constructor
+2. Private static instance variable
+3. Public static method to return instance
+
+
+-----------------------------------------------------
+
+4) Types of Singleton Implementations
+------------------------------------
+
+4.1 Eager Initialization
+------------------------
+- Instance is created at class loading time
+
+Pros:
+✔ Thread-safe
+✔ Simple implementation
+
+Cons:
+❌ Object created even if not used
+❌ Memory waste
+
+
+-----------------------------------------------------
+
+4.2 Lazy Initialization (NOT Thread-Safe)
+-----------------------------------------
+- Instance is created only when needed
+
+Problem ❌:
+❌ Not thread-safe
+❌ Multiple threads may create multiple objects
+
+
+-----------------------------------------------------
+
+4.3 Thread-Safe Singleton (Synchronized Method)
+-----------------------------------------------
+- getInstance() method is synchronized
+
+Pros:
+✔ Thread-safe
+
+Cons ❌:
+❌ Performance overhead
+❌ Method-level locking
+
+
+-----------------------------------------------------
+
+4.4 BEST PRACTICE: Double-Checked Locking
+----------------------------------------
+- Uses synchronized block
+- Checks instance twice
+
+Why "volatile" is IMPORTANT?
+- Prevents instruction reordering
+- Ensures visibility across threads
+
+This is the MOST ASKED implementation in interviews.
+
+
+-----------------------------------------------------
+
+4.5 BEST & SIMPLEST: Enum Singleton
+-----------------------------------
+- Uses enum to implement Singleton
+
+Why Enum Singleton is BEST?
+✔ Thread-safe
+✔ Serialization-safe
+✔ Reflection-safe
+✔ Very simple
+
+Recommended by Effective Java.
+
+
+-----------------------------------------------------
+
+5) How Singleton Can Be Broken
+------------------------------
+Singleton can be broken using:
+- Reflection
+- Serialization
+- Cloning
+
+NOTE:
+→ Enum Singleton prevents ALL of these.
+
+
+-----------------------------------------------------
+
+6) Singleton vs Static Class
+----------------------------
+Singleton:
+- Has object instance
+- Supports inheritance
+- Supports lazy loading
+
+Static Class:
+- No object instance
+- Cannot implement interfaces
+- No lazy loading
+
+
+-----------------------------------------------------
+
+7) When NOT to Use Singleton
+----------------------------
+❌ When object state changes frequently
+❌ When testing becomes difficult
+❌ When multiple instances may be needed later
+❌ Overuse leads to global state problems
+
+
+-----------------------------------------------------
+
+8) Real-World Usage
+-------------------
+- Spring Beans (default scope is singleton)
+- Logging frameworks
+- Configuration managers
+- Connection pools
+
+
+-----------------------------------------------------
+
+9) One-Line Interview Answer
+----------------------------
+Singleton ensures that only one instance of a class
+exists and provides a global access point to it.
+
+
+-----------------------------------------------------
+
+10) Ultra-Short Revision
+-----------------------
+- One instance only
+- Private constructor
+- Static instance
+- Global access point
+
+=====================================================
+
+************************************************************************************************************************************
+
+=====================================================
+FACTORY METHOD DESIGN PATTERN
+=====================================================
+
+1) What is Factory Method?
+-------------------------
+Factory Method defines an interface for creating an
+object, but lets SUBCLASSES decide which class to
+instantiate.
+
+In simple words:
+→ Object creation is delegated to subclasses
+
+Used when:
+- Exact object type is not known at compile time
+- You want loose coupling
+- Object creation logic must be hidden
+
+
+-----------------------------------------------------
+
+2) How do we know it is Factory Method?
+--------------------------------------
+- There is an ABSTRACT creator class
+- Creator has ONE factory method
+- Factory method returns a PRODUCT interface
+- Subclasses OVERRIDE factory method
+- Client avoids using "new"
+
+Key Identifier:
+→ Object creation happens in overridden method
+
+
+-----------------------------------------------------
+
+3) Rules of Factory Method
+-------------------------
+To implement Factory Method:
+
+1. Create a PRODUCT interface
+2. Create CONCRETE product classes
+3. Create an ABSTRACT creator class
+4. Declare an ABSTRACT factory method
+5. Subclasses override factory method
+6. Client uses creator, not concrete classes
+
+
+-----------------------------------------------------
+
+4) What Problem Does It Solve?
+------------------------------
+Problems without Factory Method:
+- Tight coupling using "new"
+- Too many if-else or switch statements
+- Violates Open–Closed Principle
+- Difficult to extend
+
+Solutions:
+- Uses polymorphism
+- Removes direct dependency on concrete classes
+- Easy to add new product types
+
+
+-----------------------------------------------------
+
+5) Structure of Factory Method
+------------------------------
+Product
+  └── defines common interface
+
+ConcreteProduct
+  └── implements product interface
+
+Creator
+  └── declares factory method
+
+ConcreteCreator
+  └── overrides factory method
+
+
+-----------------------------------------------------
+
+6) Factory Method vs Simple Factory
+-----------------------------------
+Simple Factory:
+- Uses if-else
+- NOT a GoF pattern
+- Violates Open–Closed Principle
+
+Factory Method:
+- Uses inheritance
+- GoF design pattern
+- Follows Open–Closed Principle
+
+
+-----------------------------------------------------
+
+7) Factory Method vs Abstract Factory
+-------------------------------------
+Factory Method:
+- Creates ONE product
+- Has ONE factory method
+
+Abstract Factory:
+- Creates PRODUCT FAMILIES
+- Has MULTIPLE factory methods
+
+
+-----------------------------------------------------
+
+8) Advantages
+-------------
+✔ Loose coupling
+✔ Follows Open–Closed Principle
+✔ Easy to extend
+✔ Improves testability
+
+
+-----------------------------------------------------
+
+9) Disadvantages
+----------------
+❌ Increases number of classes
+❌ Slightly complex
+❌ Overkill for small applications
+
+
+-----------------------------------------------------
+
+10) Real-World Usage
+--------------------
+- Spring BeanFactory
+- ApplicationContext.getBean()
+- LoggerFactory
+- Notification factories
+
+
+-----------------------------------------------------
+
+11) One-Line Interview Answer
+----------------------------
+Factory Method defines a method for creating objects
+where subclasses decide the concrete implementation,
+promoting loose coupling and extensibility.
+
+
+-----------------------------------------------------
+
+12) Ultra-Short Revision
+-----------------------
+- One factory method
+- Subclasses decide object creation
+- Uses polymorphism
+- Avoids direct "new"
+
+=====================================================
+
+************************************************************************************************************************************
+
+=====================================================
+ABSTRACT FACTORY DESIGN PATTERN
+=====================================================
+
+1) What is Abstract Factory?
+----------------------------
+Abstract Factory provides an interface for creating
+FAMILIES of related or dependent objects
+without specifying their concrete classes.
+
+In simple words:
+→ It is a "Factory of Factories"
+
+Used when:
+- Objects are related
+- Objects must be used together
+- Entire product family needs to be switched
+
+Example:
+UI Toolkit
+- Windows → Button + Checkbox
+- Mac → Button + Checkbox
+
+
+-----------------------------------------------------
+
+2) How do we know it is Abstract Factory?
+----------------------------------------
+- There is ONE factory interface
+- Factory contains MULTIPLE creation methods
+- Each concrete factory creates RELATED objects
+- Switching factory switches ENTIRE product family
+
+Key Identifier:
+→ Multiple factory methods creating related objects
+
+
+-----------------------------------------------------
+
+3) Rules of Abstract Factory
+----------------------------
+To implement Abstract Factory:
+
+- Create abstract product interfaces
+  (e.g., Button, Checkbox)
+
+- Create concrete products in families
+  (WindowsButton, WindowsCheckbox)
+  (MacButton, MacCheckbox)
+
+- Create abstract factory interface
+  (UIFactory)
+
+- Factory must expose MULTIPLE creation methods
+
+- Client should depend ONLY on abstractions
+  (interfaces, not concrete classes)
+
+
+-----------------------------------------------------
+
+4) What Problem Does It Solve?
+------------------------------
+Problems without Abstract Factory:
+- Tight coupling
+- Risk of mixing incompatible objects
+- Difficult to switch environments
+- Scattered object creation logic
+
+Solutions:
+- Enforces consistency
+- Ensures compatibility
+- Hides concrete implementations
+- Easy switching of product families
+
+
+-----------------------------------------------------
+
+5) Structure of Abstract Factory
+--------------------------------
+AbstractFactory
+  └── declares multiple factory methods
+
+ConcreteFactory
+  └── creates a family of related products
+
+AbstractProduct
+  └── common interface for products
+
+ConcreteProduct
+  └── actual implementation
+
+
+-----------------------------------------------------
+
+6) Example Product Families
+---------------------------
+WindowsFactory:
+- WindowsButton
+- WindowsCheckbox
+
+MacFactory:
+- MacButton
+- MacCheckbox
+
+Rule:
+→ Products created by one factory must belong
+  to the same family
+
+
+-----------------------------------------------------
+
+7) Abstract Factory vs Factory Method
+-------------------------------------
+
+Factory Method:
+- Creates ONE product
+- Has ONE factory method
+- Focuses on object creation
+
+Abstract Factory:
+- Creates PRODUCT FAMILIES
+- Has MULTIPLE factory methods
+- Focuses on consistency
+
+Memory Trick:
+Factory Method  → one object
+Abstract Factory → group of objects
+
+
+-----------------------------------------------------
+
+8) Advantages
+-------------
+✔ Enforces product consistency
+✔ Loose coupling
+✔ Easy to switch families
+✔ Scales well for multiple environments
+
+
+-----------------------------------------------------
+
+9) Disadvantages
+----------------
+❌ Too many classes
+❌ Hard to add a new product type
+❌ Overkill for small applications
+
+Interview Trap:
+→ Adding new product family is easy
+→ Adding new product type is difficult
+
+
+-----------------------------------------------------
+
+10) Real-World Usage
+--------------------
+- Spring AbstractBeanFactory
+- JDBC (Connection + Statement)
+- UI frameworks
+- Cloud SDKs (AWS vs Azure)
+
+
+-----------------------------------------------------
+
+11) One-Line Interview Answer
+-----------------------------
+Abstract Factory provides an interface to create
+families of related objects while hiding their
+concrete implementations and ensuring consistency.
+
+
+-----------------------------------------------------
+
+12) Ultra-Short Revision
+-----------------------
+- Factory of factories
+- Related objects
+- Multiple creation methods
+- Family consistency
+
+=====================================================
+
+************************************************************************************************************************************
+
+=====================================================
+BUILDER DESIGN PATTERN
+=====================================================
+
+1) What is Builder Pattern?
+--------------------------
+Builder pattern is a creational design pattern used
+to construct COMPLEX objects step by step.
+
+It separates:
+- Object construction
+- Object representation
+
+In simple words:
+→ Same construction process, different objects
+
+Used when:
+- Object has many parameters
+- Some parameters are optional
+- You want immutable objects
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Builder?
+-------------------------
+Problems without Builder:
+- Too many constructor parameters
+- Telescoping constructor problem
+- Poor readability
+- Hard to maintain and test
+
+Example Problem:
+User(String name, int age, String email, String phone,
+     String address, boolean active)
+
+
+-----------------------------------------------------
+
+3) How do we know it is Builder Pattern?
+---------------------------------------
+- There is a BUILDER class
+- Builder has setter-like methods
+- Each method returns the builder itself
+- A final build() method creates the object
+- Object constructor is private
+
+Key Identifier:
+→ Method chaining + build() method
+
+
+-----------------------------------------------------
+
+4) Rules of Builder Pattern
+--------------------------
+To implement Builder:
+
+1. Make product constructor PRIVATE
+2. Create static inner Builder class
+3. Builder has fields same as product
+4. Builder provides chained methods
+5. build() returns final object
+
+
+-----------------------------------------------------
+
+5) Structure of Builder Pattern
+-------------------------------
+Product
+  └── complex object being built
+
+Builder
+  └── constructs product step by step
+
+Client
+  └── uses builder to create object
+
+
+-----------------------------------------------------
+
+6) What Problem Does It Solve?
+------------------------------
+Problems:
+- Object creation becomes confusing
+- Hard to understand constructor arguments
+- Difficult to create immutable objects
+
+Solutions:
+- Clear and readable object creation
+- Flexible construction
+- Immutability support
+
+
+-----------------------------------------------------
+
+7) Example (Mental Model)
+------------------------
+User user = User.builder()
+                .name("John")
+                .email("john@gmail.com")
+                .age(25)
+                .build();
+
+
+-----------------------------------------------------
+
+8) Builder vs Constructor
+-------------------------
+Constructor:
+- Poor readability
+- Hard to handle optional fields
+
+Builder:
+- Readable
+- Flexible
+- Scalable
+
+
+-----------------------------------------------------
+
+9) Builder vs Factory
+---------------------
+Factory:
+- Creates objects in one step
+- Focus on object type
+
+Builder:
+- Creates objects step by step
+- Focus on object construction
+
+
+-----------------------------------------------------
+
+10) Advantages
+--------------
+✔ Improves readability
+✔ Handles optional parameters
+✔ Supports immutability
+✔ Easy to extend
+
+
+-----------------------------------------------------
+
+11) Disadvantages
+-----------------
+❌ More code
+❌ Extra builder class
+❌ Overkill for simple objects
+
+
+-----------------------------------------------------
+
+12) Real-World Usage
+--------------------
+- Lombok @Builder
+- StringBuilder
+- DTO creation
+- Complex configuration objects
+
+
+-----------------------------------------------------
+
+13) One-Line Interview Answer
+----------------------------
+Builder pattern constructs complex objects step by
+step while keeping object creation readable and
+flexible.
+
+
+-----------------------------------------------------
+
+14) Ultra-Short Revision
+-----------------------
+- Step-by-step object creation
+- Method chaining
+- build() method
+- Handles optional fields
+
+=====================================================
+
+************************************************************************************************************************************
+
+=====================================================
+PROTOTYPE DESIGN PATTERN
+=====================================================
+
+1) What is Prototype Pattern?
+-----------------------------
+Prototype pattern is a creational design pattern used
+to create new objects by CLONING existing objects
+instead of creating them using "new".
+
+In simple words:
+→ Copy an existing object to create a new one
+
+Used when:
+- Object creation is expensive
+- You want to avoid repeated initialization
+- Objects have same base configuration
+
+
+-----------------------------------------------------
+
+2) Why Do We Need Prototype?
+----------------------------
+Problems without Prototype:
+- Object creation is costly
+- Complex setup logic repeated
+- Performance issues
+
+Example:
+Creating database connection configs
+or large objects repeatedly
+
+
+-----------------------------------------------------
+
+3) How do we know it is Prototype Pattern?
+------------------------------------------
+- Class implements Cloneable
+- clone() method is present
+- New object created by copying
+- No direct use of constructor
+
+Key Identifier:
+→ Object creation via clone()
+
+
+-----------------------------------------------------
+
+4) Rules of Prototype Pattern
+-----------------------------
+To implement Prototype:
+
+1. Implement Cloneable interface
+2. Override clone() method
+3. Handle shallow or deep copy
+4. Client uses clone(), not "new"
+
+
+-----------------------------------------------------
+
+5) Structure of Prototype Pattern
+---------------------------------
+Prototype
+  └── declares clone()
+
+ConcretePrototype
+  └── implements cloning logic
+
+Client
+  └── clones prototype object
+
+
+-----------------------------------------------------
+
+6) Shallow Copy vs Deep Copy
+----------------------------
+
+Shallow Copy:
+- Copies object references
+- Shared mutable objects
+- Faster
+
+Deep Copy:
+- Copies actual objects
+- No shared references
+- Safer but slower
+
+Interview Tip:
+→ Always clarify shallow vs deep copy
+
+
+-----------------------------------------------------
+
+7) What Problem Does It Solve?
+------------------------------
+Problems:
+- Expensive object creation
+- Repeated setup logic
+- Performance bottlenecks
+
+Solutions:
+- Faster object creation
+- Reuse existing objects
+- Cleaner code
+
+
+-----------------------------------------------------
+
+8) Advantages
+-------------
+✔ Improves performance
+✔ Reduces object creation cost
+✔ Simplifies complex initialization
+
+
+-----------------------------------------------------
+
+9) Disadvantages
+----------------
+❌ Clone logic can be complex
+❌ Deep copy implementation is tricky
+❌ Cloning breaks encapsulation
+
+
+-----------------------------------------------------
+
+10) Prototype vs Builder
+------------------------
+Prototype:
+- Copy existing object
+- Used when base object exists
+
+Builder:
+- Create object step by step
+- Used when object does not exist
+
+
+-----------------------------------------------------
+
+11) Prototype vs Factory
+------------------------
+Prototype:
+- Copies existing object
+- Avoids new object creation
+
+Factory:
+- Creates new object
+- Focus on object type
+
+
+-----------------------------------------------------
+
+12) Real-World Usage
+--------------------
+- Object.clone()
+- Game character cloning
+- Document templates
+- Cache-based object reuse
+
+
+-----------------------------------------------------
+
+13) One-Line Interview Answer
+----------------------------
+Prototype pattern creates new objects by cloning
+existing ones, reducing the cost of object creation.
+
+
+-----------------------------------------------------
+
+14) Ultra-Short Revision
+-----------------------
+- Clone existing object
+- Avoid new
+- Improves performance
+- Shallow vs deep copy
+
+=====================================================
+
+************************************************************************************************************************************
+
+--------------------------------- Creational Design Patterns – Comparison Table ---------------------------------
+
+| Aspect                       | **Singleton**                | **Factory Method**                | **Abstract Factory**                   | **Builder**                            | **Prototype**                               |
+| ---------------------------- | ---------------------------- | --------------------------------- | -------------------------------------- | -------------------------------------- | ------------------------------------------- |
+| **Main Purpose**             | Ensure only **one instance** | Decide **which object** to create | Create **families of related objects** | Build **complex objects step by step** | Create objects by **cloning existing ones** |
+| **Focus**                    | Instance count               | Object creation logic             | Consistency of related objects         | Object construction                    | Object copying                              |
+| **Controls**                 | HOW MANY objects             | WHICH object                      | WHICH GROUP of objects                 | HOW object is built                    | HOW object is copied                        |
+| **Object Creation**          | Restricted                   | Delegated to subclasses           | Delegated to factory families          | Step-by-step                           | Clone instead of `new`                      |
+| **Uses Inheritance**         | ❌ No                         | ✅ Yes                             | ❌ No (uses composition)                | ❌ No                                   | ❌ No                                        |
+| **Uses Polymorphism**        | ❌ No                         | ✅ Yes                             | ✅ Yes                                  | ❌ No                                   | ❌ No                                        |
+| **Factory Methods**          | ❌ None                       | ✅ One                             | ✅ Multiple                             | ❌ None                                 | ❌ None                                      |
+| **Returns Same Object?**     | ✅ Always                     | ❌ No                              | ❌ No                                   | ❌ No                                   | ❌ No                                        |
+| **Handles Complex Objects?** | ❌ No                         | ❌ No                              | ⚠️ Partially                           | ✅ Yes                                  | ⚠️ Depends                                  |
+| **Supports Immutability**    | ❌ No                         | ❌ No                              | ❌ No                                   | ✅ Yes                                  | ❌ No                                        |
+| **Performance Benefit**      | ❌ No                         | ❌ No                              | ❌ No                                   | ❌ No                                   | ✅ Yes                                       |
+| **Common Use Case**          | Logger, Config               | VehicleFactory                    | UI Toolkit                             | DTOs                                   | Game objects                                |
+| **Real-World Example**       | Principal                    | Vehicle showroom                  | OS UI families                         | Lombok `@Builder`                      | Copy templates                              |
+| **Overkill When**            | Multiple instances needed    | Few object types                  | Only one product                       | Simple objects                         | Object creation is cheap                    |
+| **Interview One-Liner**      | One instance only            | Subclasses decide object          | Factory of factories                   | Step-by-step construction              | Clone instead of new                        |
+
+************************************************************************************************************************************
