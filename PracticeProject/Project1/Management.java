@@ -14,12 +14,12 @@ class Student {
     }
 
     void display() {
-        System.out.println(id + "\n" + name + "\n" + age + "\n" + marks);
+        System.out.println("ID: " + id + ", Name: " + name + ", Age: " + age + ", Marks: " + marks);
     }
 
     void isPass() {
         if (marks >= 40) {
-            System.out.println("Student is Pass");
+            System.out.println(name+ " is Pass");
         } else {
             System.out.println("Student is Fail");
         }
