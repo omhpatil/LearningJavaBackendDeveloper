@@ -13,6 +13,10 @@ class Student {
         this.marks = marks;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void display() {
         System.out.println("ID: " + id + ", Name: " + name + ", Age: " + age + ", Marks: " + marks);
     }

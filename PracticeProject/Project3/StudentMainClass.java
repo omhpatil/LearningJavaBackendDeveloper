@@ -13,7 +13,8 @@ public class StudentMainClass {
 
             System.out.println("1. Add Student");
             System.out.println("2. Display All Students");
-            System.out.println("3. Quit");
+            System.out.println("3. Search Student");
+            System.out.println("4. Quit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
 
@@ -21,9 +22,10 @@ public class StudentMainClass {
                 case 1:
                     System.out.print("Enter Student ID: ");
                     int id = sc.nextInt();
+                    sc.nextLine();                          // Add one extra nextLine() after nextInt() to resolve problem
 
                     System.out.print("Enter Student Name: ");
-                    String name = sc.next();
+                    String name = sc.nextLine();
 
                     System.out.print("Enter Student Age: ");
                     int age = sc.nextInt();
@@ -42,6 +44,19 @@ public class StudentMainClass {
                     break;
 
                 case 3:
+                    System.out.print("Enter Student ID: ");
+                    int searchId = sc.nextInt();
+                    Student found  = ss.searchStudent(searchId);
+
+                    if (found != null) {
+                        System.out.println("Student Found Successfully!");
+                        found.display();
+                    }else {
+                        System.out.println("Student Not Found!");
+                    }
+                    break;
+
+                case 4:
                     System.out.println("Exiting...");
                     sc.close();
                     System.exit(0);
