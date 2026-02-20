@@ -42,3 +42,8 @@ Q: Why generics don’t support primitives?
    ✔ Type erasure
    ✔ Also generics works with objects only and primitives are not obejcts
 
+| Layer   | Responsibility  |
+| ------- | --------------- |
+| Student | Data validation |
+| Service | Business rules  |
+| Main    | UI only         |
