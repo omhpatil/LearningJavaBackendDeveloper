@@ -14,7 +14,9 @@ public class StudentMainClass {
             System.out.println("1. Add Student");
             System.out.println("2. Display All Students");
             System.out.println("3. Search Student");
-            System.out.println("4. Quit");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Update Student");
+            System.out.println("6. Quit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
 
@@ -46,17 +48,60 @@ public class StudentMainClass {
                 case 3:
                     System.out.print("Enter Student ID: ");
                     int searchId = sc.nextInt();
-                    Student found  = ss.searchStudent(searchId);
+                    Student found = ss.searchStudentById(searchId);
 
                     if (found != null) {
                         System.out.println("Student Found Successfully!");
                         found.display();
-                    }else {
+                    } else {
                         System.out.println("Student Not Found!");
                     }
                     break;
 
                 case 4:
+                    System.out.print("Enter Student ID: ");
+                    int deleteId = sc.nextInt();
+                    boolean deleted = ss.deleteStudentById(deleteId);
+                    if (deleted) {
+                        System.out.println("Student Deleted Successfully!");
+                    } else {
+                        System.out.println("Student Not Deleted!");
+                    }
+                    break;
+
+                case 5:
+                    System.out.print("Enter ID to update: ");
+                    int updateId = sc.nextInt();
+
+                    sc.nextLine(); // clear buffer
+
+                    //  First check if student exists
+                    Student existingStudent = ss.searchStudentById(updateId);
+
+                    if (existingStudent == null) {
+                        System.out.println("Student Not Found!");
+                        break;   // 🚀 stop here immediately
+                    }
+
+                    System.out.print("Enter New Name: ");
+                    String newName = sc.nextLine();
+
+                    System.out.print("Enter New Age: ");
+                    int newAge = sc.nextInt();
+
+                    System.out.print("Enter New Marks: ");
+                    double newMarks = sc.nextDouble();
+
+                    boolean updated = ss.updateStudent(updateId, newName, newAge, newMarks);
+
+                    if (updated) {
+                        System.out.println("Student Updated Successfully!");
+                    } else {
+                        System.out.println("Student Not Found!");
+                    }
+                    break;
+
+                case 6:
                     System.out.println("Exiting...");
                     sc.close();
                     System.exit(0);

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 class StudentService {
 
-    private ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
 
     void addStudent(Student student) {
         students.add(student);
     }
 
-    Student searchStudent(int id) {
+    Student searchStudentById(int id) {
         for (Student s : students) {
             if (s.getId() == id) {
                 return s;
@@ -19,11 +19,35 @@ class StudentService {
         return null;
     }
 
+    boolean updateStudent(int id, String newName, int newAge, double newMarks) {
+        Student student = searchStudentById(id);
+
+        if (student != null) {
+            student.setName(newName);
+            student.setAge(newAge);
+            student.setMarks(newMarks);
+            return true;
+        }
+        return false;
+    }
+
     void displayAllStudents() {
         for (Student s : students) {
             s.display();
         }
     }
+
+    boolean deleteStudentById(int id) {
+        Student student = searchStudentById(id);
+
+        if (student != null) {
+            students.remove(student);                   // using inbuilt method .remove()
+            return true;
+        }
+        return false;
+    }
+
+
 }
 
 // We use return type Student because: This method searches and returns a Student object that matches the given id.
