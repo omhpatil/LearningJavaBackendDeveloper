@@ -36,9 +36,13 @@ public class StudentMainClass {
                     int marks = sc.nextInt();
 
                     Student student = new Student(id, name, age, marks);
-                    ss.addStudent(student);
+                    boolean added = ss.addStudent(student);
 
-                    System.out.println("Student Added Successfully!");
+                    if (added) {
+                        System.out.println("Student Added Successfully!");
+                    } else {
+                        System.out.println("Student with this ID already exists!");
+                    }
                     break;
 
                 case 2:
@@ -80,7 +84,7 @@ public class StudentMainClass {
 
                     if (existingStudent == null) {
                         System.out.println("Student Not Found!");
-                        break;   // 🚀 stop here immediately
+                        break;   // stop here immediately
                     }
 
                     System.out.print("Enter New Name: ");

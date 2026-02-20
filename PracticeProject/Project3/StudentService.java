@@ -6,9 +6,16 @@ class StudentService {
 
     private final ArrayList<Student> students = new ArrayList<>();
 
-    void addStudent(Student student) {
+    boolean addStudent(Student student) {
+
+        if (searchStudentById(student.getId()) != null) {
+            return false; // duplicate found
+        }
+
         students.add(student);
+        return true;
     }
+
 
     Student searchStudentById(int id) {
         for (Student s : students) {
@@ -51,3 +58,6 @@ class StudentService {
 }
 
 // We use return type Student because: This method searches and returns a Student object that matches the given id.
+
+// Q: How to make search/update/delete O(1)?
+// --> Use HashMap<Integer, Student>
