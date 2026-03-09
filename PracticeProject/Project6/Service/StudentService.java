@@ -13,14 +13,3 @@ public interface StudentService {
 
     void displayAllStudents();
 }
-
-// In this project, WHY Interface?
-// - Interface defines WHAT
-// -Implementation defines HOW
-// -Loose coupling
-// -Easy to replace logic later
-
-//This is foundation of:
-//- Spring Boot
-//- Dependency Injection
-//- Clean Architecture
