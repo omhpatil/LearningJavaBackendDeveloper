@@ -1,8 +1,13 @@
-package PracticeProject.Project6.Model;
+package PracticeProject.Project7.Model;
 
-import PracticeProject.Project6.Exception.InvalidStudentDataException;
+import PracticeProject.Project7.Exception.InvalidStudentDataException;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     int id;
     String name;
     int age;
@@ -28,12 +33,24 @@ public class Student {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }
 
     public void setMarks(double marks) {
         this.marks = marks;
+    }
+
+    public double getMarks() {
+        return marks;
     }
 
     public int getId() {

@@ -1,12 +1,13 @@
-package PracticeProject.Project6.UI;
+package PracticeProject.Project7.UI;
 
-import PracticeProject.Project6.Model.Student;
-import PracticeProject.Project6.Service.StudentService;
-import PracticeProject.Project6.Service.StudentServiceImpl;
-import PracticeProject.Project6.Exception.DuplicateStudentException;
-import PracticeProject.Project6.Exception.InvalidStudentDataException;
-import PracticeProject.Project6.Exception.StudentNotFoundException;
+import PracticeProject.Project7.Exception.DuplicateStudentException;
+import PracticeProject.Project7.Exception.InvalidStudentDataException;
+import PracticeProject.Project7.Exception.StudentNotFoundException;
+import PracticeProject.Project7.Model.Student;
+import PracticeProject.Project7.Service.StudentService;
+import PracticeProject.Project7.Service.StudentServiceImpl;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainApp {
@@ -19,15 +20,26 @@ public class MainApp {
 
         while (true) {
 
-            System.out.println("\n1. Add Student");
+            System.out.println("\n----- Student Management System -----");
+            System.out.println("1. Add Student");
             System.out.println("2. Display All Students");
             System.out.println("3. Search Student");
             System.out.println("4. Delete Student");
             System.out.println("5. Update Student");
-            System.out.println("6. Quit");
+            System.out.println("6. Sort Students by Marks");
+            System.out.println("7. Sort Students by Name");
+            System.out.println("8. Quit");
             System.out.print("Enter your choice: ");
 
-            int choice = sc.nextInt();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (choice) {
 
@@ -45,7 +57,7 @@ public class MainApp {
                         int age = sc.nextInt();
 
                         System.out.print("Enter Student Marks: ");
-                        int marks = sc.nextInt();
+                        double marks = sc.nextDouble();
 
                         Student student = new Student(id, name, age, marks);
 
@@ -53,9 +65,7 @@ public class MainApp {
 
                         System.out.println("Student Added Successfully!");
 
-                    } catch (DuplicateStudentException e) {
-                        System.out.println(e.getMessage());
-                    } catch (InvalidStudentDataException e) {
+                    } catch (DuplicateStudentException | InvalidStudentDataException e) {
                         System.out.println(e.getMessage());
                     }
 
@@ -68,19 +78,16 @@ public class MainApp {
                     break;
 
                 case 3:
+                    System.out.print("Enter Student ID: ");
+                    int searchId = sc.nextInt();
 
-                    try {
+                    Student found = service.searchStudentById(searchId);
 
-                        System.out.print("Enter Student ID: ");
-                        int searchId = sc.nextInt();
-
-                        Student found = service.searchStudentById(searchId);
-
+                    if (found != null) {
                         System.out.println("Student Found Successfully!");
                         found.display();
-
-                    } catch (StudentNotFoundException e) {
-                        System.out.println(e.getMessage());
+                    } else {
+                        System.out.println("Student Not Found!");
                     }
 
                     break;
@@ -123,16 +130,21 @@ public class MainApp {
 
                         System.out.println("Student Updated Successfully!");
 
-                    } catch (StudentNotFoundException e) {
-                        System.out.println(e.getMessage());
-                    } catch (InvalidStudentDataException e) {
+                    } catch (StudentNotFoundException | InvalidStudentDataException e) {
                         System.out.println(e.getMessage());
                     }
 
                     break;
 
                 case 6:
+                    service.sortStudentsByMarks();
+                    break;
 
+                case 7:
+                    service.sortStudentsByName();
+                    break;
+
+                case 8:
                     System.out.println("Exiting...");
                     sc.close();
                     System.exit(0);

@@ -1,4 +1,4 @@
-package PracticeProject.Project6.Exception;
+package PracticeProject.Project7.Exception;
 
 public class DuplicateStudentException extends RuntimeException {
 

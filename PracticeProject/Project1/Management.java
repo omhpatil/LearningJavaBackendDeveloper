@@ -19,7 +19,7 @@ class Student {
 
     void isPass() {
         if (marks >= 40) {
-            System.out.println(name+ " is Pass");
+            System.out.println(name + " is Pass");
         } else {
             System.out.println("Student is Fail");
         }

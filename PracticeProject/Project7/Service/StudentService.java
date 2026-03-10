@@ -1,6 +1,6 @@
-package PracticeProject.Project6.Service;
+package PracticeProject.Project7.Service;
 
-import PracticeProject.Project6.Model.Student;
+import PracticeProject.Project7.Model.Student;
 
 public interface StudentService {
     boolean addStudent(Student student);
@@ -12,4 +12,8 @@ public interface StudentService {
     boolean updateStudent(int id, String newName, int newAge, double newMarks);
 
     void displayAllStudents();
+
+    void sortStudentsByMarks();
+    
+    void sortStudentsByName();
 }
