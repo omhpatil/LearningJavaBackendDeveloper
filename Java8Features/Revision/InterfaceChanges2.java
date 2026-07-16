@@ -1,4 +1,4 @@
-package Java8Features;
+package Java8Features.Revision;
 
 interface Human {
     void run();
