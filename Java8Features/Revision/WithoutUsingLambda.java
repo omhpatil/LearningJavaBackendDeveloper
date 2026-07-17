@@ -7,7 +7,7 @@ interface MyInterface {
 public class WithoutUsingLambda implements MyInterface {
 
     public void display() {
-        System.out.println("Hey, How are you!!!");
+        System.out.println("Hey, How are you!!");
     }
 
     public static void main(String[] args) {

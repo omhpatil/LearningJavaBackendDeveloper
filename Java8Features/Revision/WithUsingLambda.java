@@ -8,7 +8,7 @@ interface MyInterface2 {
 public class WithUsingLambda {
 
     public static void main(String[] args) {
-        MyInterface2 m2 = () -> System.out.println("To kaise ho app log....");
+        MyInterface2 m2 = () -> System.out.println("To kaise ho app log...");
         m2.display();
     }
 }
