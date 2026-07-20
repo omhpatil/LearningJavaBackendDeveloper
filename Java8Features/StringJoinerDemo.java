@@ -16,6 +16,7 @@ public class StringJoinerDemo {
 
         System.out.println(skills);
 
+
         System.out.println("Length : " + skills.length());
 
         StringJoiner databases =
